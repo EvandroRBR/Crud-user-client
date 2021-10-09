@@ -10,3 +10,10 @@ export const createUserValidation = celebrate({
     password_confirmation: Joi.string().required().valid(Joi.ref('password')),
   },
 });
+
+export const sessionValidation = celebrate({
+  [Segments.BODY]: {
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  },
+});
