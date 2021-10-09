@@ -31,9 +31,12 @@
       }
     ],
     "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "camelcase": "off",
+    "no-param-reassign": "off",
+    "no-useless-constructor": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

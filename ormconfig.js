@@ -8,6 +8,7 @@ module.exports = [
     useUnifiedTopology: true,
     authSourse: 'admin',
     database: 'crud_test',
-    entities: ["./src/modules/**/infra/typeorm/schemas/**{.ts}"],
+    entities: ["./src/modules/**/infra/typeorm/schemas/**.ts"],
+
   }
 ]
