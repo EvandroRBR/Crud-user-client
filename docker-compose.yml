@@ -11,10 +11,9 @@ services:
       - ./:/app
     ports:
       - 3333:3333
-    networks:
-      - api
     depends_on:
       - mongo_db
+    network_mode: host
 
   mongo_db:
     image: mongo
@@ -28,9 +27,4 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=mongopass
-    networks:
-      - api
-
-networks:
-  api:
-    driver: bridge
+    network_mode: host
