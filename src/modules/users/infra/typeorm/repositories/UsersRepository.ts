@@ -1,7 +1,7 @@
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import { ObjectId } from 'mongodb';
 
-import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+import { ICreateUserDTO, IUpdateUserDTO } from '@modules/users/dtos/IUserDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
 import { User } from '@modules/users/infra/typeorm/schemas/Users';
 
@@ -38,6 +38,23 @@ class UsersRepository implements IUsersRepository {
     });
 
     return user;
+  }
+
+  public async save(data: IUpdateUserDTO): Promise<User | undefined> {
+    await this.ormRepository.updateOne(
+      {
+        _id: new ObjectId(data.id),
+      },
+      {
+        $set: { ...data },
+      },
+    );
+
+    const updatedUser = await this.ormRepository.findOne({
+      where: { _id: data.id },
+    });
+
+    return updatedUser;
   }
 }
 

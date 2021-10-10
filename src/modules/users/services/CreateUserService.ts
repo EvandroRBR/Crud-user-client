@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
-import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+import { ICreateUserDTO } from '@modules/users/dtos/IUserDTO';
 
 import { AppError } from '@shared/errors/AppError';
 import { IUsersRepository } from '../repositories/IUsersRepository';

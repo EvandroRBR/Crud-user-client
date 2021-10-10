@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import { CreateUserService } from '@modules/users/services/CreateUserService';
 import { ListUsersService } from '@modules/users/services/ListUsersService';
 import { ShowUserService } from '@modules/users/services/ShowUserService';
+import { UpdateUserService } from '@modules/users/services/UpdateUserService';
 
 export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -30,6 +31,18 @@ export default class UsersController {
     const createUser = container.resolve(CreateUserService);
 
     const user = await createUser.execute(data);
+
+    return response.json(user);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const data = request.body;
+
+    Object.assign(data, { id: request.user.id });
+
+    const updateUser = container.resolve(UpdateUserService);
+
+    const user = await updateUser.execute(data);
 
     return response.json(user);
   }
