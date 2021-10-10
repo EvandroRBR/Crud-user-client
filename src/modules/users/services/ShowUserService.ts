@@ -3,7 +3,7 @@ import { injectable, inject } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
-import { User } from '../infra/typeorm/schemas/Users';
+import { IUser } from '../schemas/IUser';
 
 @injectable()
 class ShowUserService {
@@ -12,7 +12,7 @@ class ShowUserService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute(userId: string): Promise<User> {
+  public async execute(userId: string): Promise<IUser> {
     const user = await this.usersRepository.findById(userId);
 
     if (!user) {

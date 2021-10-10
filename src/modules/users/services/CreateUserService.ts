@@ -6,7 +6,7 @@ import { AppError } from '@shared/errors/AppError';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
-import { User } from '../infra/typeorm/schemas/Users';
+import { IUser } from '../schemas/IUser';
 
 @injectable()
 class CreateUserService {
@@ -17,7 +17,7 @@ class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute(data: ICreateUserDTO): Promise<User> {
+  public async execute(data: ICreateUserDTO): Promise<IUser> {
     const checkUserExists = await this.usersRepository.findByEmail(data.email);
 
     if (checkUserExists) {

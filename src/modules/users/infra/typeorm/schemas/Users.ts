@@ -1,3 +1,5 @@
+import { IUser } from '@modules/users/schemas/IUser';
+import { ObjectId } from 'mongodb';
 import {
   Entity,
   Column,
@@ -7,9 +9,9 @@ import {
 } from 'typeorm';
 
 @Entity('users')
-class User {
+class User implements IUser {
   @ObjectIdColumn()
-  id: string;
+  id: ObjectId;
 
   @Column()
   name: string;

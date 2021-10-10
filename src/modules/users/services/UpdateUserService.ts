@@ -5,7 +5,7 @@ import { IUpdateUserDTO } from '@modules/users/dtos/IUserDTO';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 
-import { User } from '../infra/typeorm/schemas/Users';
+import { IUser } from '../schemas/IUser';
 
 @injectable()
 class UpdateUserService {
@@ -17,7 +17,7 @@ class UpdateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute(data: IUpdateUserDTO): Promise<User | undefined> {
+  public async execute(data: IUpdateUserDTO): Promise<IUser | undefined> {
     const user = await this.usersRepository.findById(data.id);
 
     if (!user) {
@@ -29,11 +29,12 @@ class UpdateUserService {
         data.email,
       );
 
-      if (userWithUpdateEmail && userWithUpdateEmail.id !== data.id) {
+      if (
+        userWithUpdateEmail &&
+        userWithUpdateEmail.id.toHexString() !== data.id
+      ) {
         throw new AppError('Email already in use.', 401);
       }
-
-      // user.email = data.email;
     }
 
     if (data.password && !data.old_password) {

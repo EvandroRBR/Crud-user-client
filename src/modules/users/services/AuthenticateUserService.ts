@@ -8,10 +8,10 @@ import { IUsersRepository } from '../repositories/IUsersRepository';
 
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
-import { User } from '../infra/typeorm/schemas/Users';
+import { IUser } from '../schemas/IUser';
 
 interface IResponse {
-  user: User;
+  user: IUser;
   token: string;
 }
 
