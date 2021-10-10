@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import { CreateUserService } from '@modules/users/services/CreateUserService';
 import { ListUsersService } from '@modules/users/services/ListUsersService';
+import { ShowUserService } from '@modules/users/services/ShowUserService';
 
 export default class UsersController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -11,6 +12,16 @@ export default class UsersController {
     const users = await listUsers.execute();
 
     return response.json(users);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const showUser = container.resolve(ShowUserService);
+
+    const user = await showUser.execute(id);
+
+    return response.json(user);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
