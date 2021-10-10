@@ -7,4 +7,5 @@ export interface IUsersRepository {
   findAll(): Promise<IUser[]>;
   findById(userId: string): Promise<IUser | undefined>;
   save(data: IUpdateUserDTO): Promise<IUser | undefined>;
+  delete(userId: string): Promise<void>;
 }
