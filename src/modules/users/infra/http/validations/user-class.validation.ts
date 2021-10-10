@@ -11,6 +11,20 @@ export const createUserValidation = celebrate({
   },
 });
 
+export const UpdateUserValidation = celebrate({
+  [Segments.BODY]: {
+    name: Joi.string(),
+    surname: Joi.string(),
+    phone: Joi.string(),
+    email: Joi.string().email(),
+    old_password: Joi.string(),
+    password: Joi.string().when('old_password', {
+      is: Joi.exist(),
+      then: Joi.required(),
+    }),
+  },
+});
+
 export const sessionValidation = celebrate({
   [Segments.BODY]: {
     email: Joi.string().email().required(),

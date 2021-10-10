@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { createUserValidation } from '../validations/user-class.validation';
+import {
+  createUserValidation,
+  UpdateUserValidation,
+} from '../validations/user-class.validation';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
@@ -14,7 +17,7 @@ usersRouter.use(ensureAuthenticated);
 
 usersRouter.get('/', usersController.index);
 usersRouter.get('/:id', usersController.show);
-usersRouter.put('/', usersController.update);
+usersRouter.put('/', UpdateUserValidation, usersController.update);
 usersRouter.delete('/', usersController.delete);
 
 export { usersRouter };
