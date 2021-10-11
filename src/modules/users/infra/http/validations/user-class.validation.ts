@@ -6,7 +6,7 @@ export const createUserValidation = celebrate({
     surname: Joi.string().required(),
     phone: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().required(),
+    password: Joi.string().required().min(6),
     password_confirmation: Joi.string().required().valid(Joi.ref('password')),
   },
 });
@@ -18,7 +18,7 @@ export const UpdateUserValidation = celebrate({
     phone: Joi.string(),
     email: Joi.string().email(),
     old_password: Joi.string(),
-    password: Joi.string().when('old_password', {
+    password: Joi.string().min(6).when('old_password', {
       is: Joi.exist(),
       then: Joi.required(),
     }),

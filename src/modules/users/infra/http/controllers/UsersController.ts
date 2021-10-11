@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { ObjectID } from 'mongodb';
+
+import { AppError } from '@shared/errors/AppError';
 
 import { CreateUserService } from '@modules/users/services/CreateUserService';
 import { ListUsersService } from '@modules/users/services/ListUsersService';
@@ -18,6 +21,10 @@ export default class UsersController {
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
+
+    if (!ObjectID.isValid(id)) {
+      throw new AppError('Id is in invalid format');
+    }
 
     const showUser = container.resolve(ShowUserService);
 

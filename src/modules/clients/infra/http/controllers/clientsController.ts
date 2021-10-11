@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { ObjectID } from 'mongodb';
+
+import { AppError } from '@shared/errors/AppError';
 
 import { CreateClientService } from '@modules/clients/services/CreateClientService';
 import { ListClientsService } from '@modules/clients/services/ListClientsService';
@@ -26,6 +29,10 @@ export class ClientsController {
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
+
+    if (!ObjectID.isValid(id)) {
+      throw new AppError('Id is in invalid format');
+    }
 
     const showClient = container.resolve(ShowClientService);
 
