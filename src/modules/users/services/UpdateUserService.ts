@@ -21,7 +21,7 @@ class UpdateUserService {
     const user = await this.usersRepository.findById(data.id);
 
     if (!user) {
-      throw new AppError('User not found.', 404);
+      throw new AppError('User not found', 404);
     }
 
     if (data.email) {
@@ -33,13 +33,13 @@ class UpdateUserService {
         userWithUpdateEmail &&
         userWithUpdateEmail.id.toHexString() !== data.id
       ) {
-        throw new AppError('Email already in use.', 401);
+        throw new AppError('Email already in use', 401);
       }
     }
 
     if (data.password && !data.old_password) {
       throw new AppError(
-        'You need to inform the old password to set a new password.',
+        'You need to inform the old password to set a new password',
         403,
       );
     }
@@ -51,7 +51,7 @@ class UpdateUserService {
       );
 
       if (!checkOldPassword) {
-        throw new AppError('Old password does not match.', 403);
+        throw new AppError('Old password does not match', 403);
       }
 
       data.password = await this.hashProvider.generateHash(data.password);
