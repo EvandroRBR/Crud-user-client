@@ -46,6 +46,12 @@ class ClientsRepository implements IClientsRepository {
 
     return client;
   }
+
+  public async findAll(): Promise<IClient[]> {
+    const clients = this.ormRepository.find();
+
+    return clients;
+  }
 }
 
 export { ClientsRepository };
