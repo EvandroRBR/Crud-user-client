@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { uuid } from 'uuidv4';
 
 import {
   ObjectIdColumn,
@@ -7,6 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Generated,
+  BeforeInsert,
 } from 'typeorm';
 
 import { IUserToken } from '@modules/users/schemas/IUserToken';
@@ -28,6 +30,11 @@ class UserToken implements IUserToken {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @BeforeInsert()
+  beforeInsertActions?(): void {
+    if (!this.token) this.token = uuid();
+  }
 }
 
 export { UserToken };

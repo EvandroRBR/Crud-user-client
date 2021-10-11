@@ -36,8 +36,8 @@ export class EtherealMailProvider implements IMailProvider {
   }: ISendMailDTO): Promise<void> {
     const message = await this.client.sendMail({
       from: {
-        name: from?.name || 'Equipe Inicial',
-        address: from?.email || 'equipe@inicial.com.br',
+        name: from?.name || 'Teste',
+        address: from?.email || 'teste@examplel.com.br',
       },
       to: {
         name: to.name,
@@ -48,6 +48,10 @@ export class EtherealMailProvider implements IMailProvider {
     });
 
     console.log(`Message send: ${message.messageId}`);
-    console.log(`Preview url: ${nodemailer.getTestMessageUrl(message)}`);
+    console.log(
+      '\x1b[34m',
+      `Preview url: ${nodemailer.getTestMessageUrl(message)}`,
+      '\x1b[0m',
+    );
   }
 }

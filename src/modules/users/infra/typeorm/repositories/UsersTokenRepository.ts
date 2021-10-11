@@ -4,19 +4,22 @@ import { getMongoRepository, MongoRepository } from 'typeorm';
 import { UserToken } from '../schemas/UserToken';
 
 class UserTokensRepository implements IUserTokensRepository {
-  private usersTokenRepository: MongoRepository<UserToken>;
+  private ormRepository: MongoRepository<UserToken>;
 
   constructor() {
-    this.usersTokenRepository = getMongoRepository<UserToken>(
-      UserToken,
-      'default',
-    );
+    this.ormRepository = getMongoRepository<UserToken>(UserToken, 'default');
   }
 
   public async create(userId: string): Promise<IUserToken> {
-    const userToken = this.usersTokenRepository.create({ user_id: userId });
+    const userToken = this.ormRepository.create({ user_id: userId });
 
-    await this.usersTokenRepository.save(userToken);
+    await this.ormRepository.save(userToken);
+
+    return userToken;
+  }
+
+  public async findByToken(token: string): Promise<IUserToken | undefined> {
+    const userToken = await this.ormRepository.findOne({ where: { token } });
 
     return userToken;
   }

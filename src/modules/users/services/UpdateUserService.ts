@@ -18,7 +18,7 @@ class UpdateUserService {
   ) {}
 
   public async execute(data: IUpdateUserDTO): Promise<IUser | undefined> {
-    const user = await this.usersRepository.findById(data.id);
+    const user = await this.usersRepository.findById(data.id.toString());
 
     if (!user) {
       throw new AppError('User does not found', 404);

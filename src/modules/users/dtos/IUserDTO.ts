@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 export interface ICreateUserDTO {
   name: string;
   surname: string;
@@ -7,7 +9,7 @@ export interface ICreateUserDTO {
 }
 
 export interface IUpdateUserDTO {
-  id: string;
+  id: string | ObjectId;
   name?: string;
   surname?: string;
   phone?: string;
