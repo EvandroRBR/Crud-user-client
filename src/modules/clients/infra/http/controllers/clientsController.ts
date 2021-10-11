@@ -7,6 +7,7 @@ import { AppError } from '@shared/errors/AppError';
 import { CreateClientService } from '@modules/clients/services/CreateClientService';
 import { ListClientsService } from '@modules/clients/services/ListClientsService';
 import { ShowClientService } from '@modules/clients/services/ShowClientService';
+import { UpdateClientService } from '@modules/clients/services/UpdateUserService';
 
 export class ClientsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -37,6 +38,23 @@ export class ClientsController {
     const showClient = container.resolve(ShowClientService);
 
     const clients = await showClient.execute(id);
+
+    return response.json(clients);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    if (!ObjectID.isValid(id)) {
+      throw new AppError('Id is in invalid format');
+    }
+    const data = request.body;
+
+    Object.assign(data, { id });
+
+    const updateClient = container.resolve(UpdateClientService);
+
+    const clients = await updateClient.execute(data);
 
     return response.json(clients);
   }

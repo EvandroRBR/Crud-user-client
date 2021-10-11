@@ -1,7 +1,10 @@
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import { ObjectId } from 'mongodb';
 
-import { ICreateClientDTO } from '@modules/clients/dtos/IClientDTO';
+import {
+  ICreateClientDTO,
+  IUpdateClientDTO,
+} from '@modules/clients/dtos/IClientDTO';
 import { IClientsRepository } from '@modules/clients/repositories/IClientsRepository';
 import { IClient } from '@modules/clients/schemas/IClient';
 
@@ -55,11 +58,28 @@ class ClientsRepository implements IClientsRepository {
   }
 
   public async findById(clientId: string): Promise<IClient | undefined> {
-    const clients = this.ormRepository.findOne({
+    const clients = await this.ormRepository.findOne({
       where: { _id: new ObjectId(clientId) },
     });
 
     return clients;
+  }
+
+  public async save(data: IUpdateClientDTO): Promise<IClient | undefined> {
+    await this.ormRepository.updateOne(
+      {
+        _id: new ObjectId(data.id),
+      },
+      {
+        $set: { ...data },
+      },
+    );
+
+    const updatedClient = await this.ormRepository.findOne({
+      where: { _id: new ObjectId(data.id) },
+    });
+
+    return updatedClient;
   }
 }
 

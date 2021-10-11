@@ -1,4 +1,4 @@
-import { ICreateClientDTO } from '../dtos/IClientDTO';
+import { ICreateClientDTO, IUpdateClientDTO } from '../dtos/IClientDTO';
 import { IClient } from '../schemas/IClient';
 
 export interface IClientsRepository {
@@ -8,4 +8,5 @@ export interface IClientsRepository {
   create(data: ICreateClientDTO): Promise<IClient>;
   findAll(): Promise<IClient[]>;
   findById(clientId: string): Promise<IClient | undefined>;
+  save(data: IUpdateClientDTO): Promise<IClient | undefined>;
 }

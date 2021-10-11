@@ -15,5 +15,6 @@ clientsRouter.use(ensureAuthenticated);
 clientsRouter.post('/', createClientValidation, clientsController.create);
 clientsRouter.get('/', clientsController.index);
 clientsRouter.get('/:id', idParamsValidate, clientsController.show);
+clientsRouter.put('/:id', idParamsValidate, clientsController.update);
 
 export { clientsRouter };

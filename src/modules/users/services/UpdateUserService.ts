@@ -21,7 +21,7 @@ class UpdateUserService {
     const user = await this.usersRepository.findById(data.id);
 
     if (!user) {
-      throw new AppError('User not found', 404);
+      throw new AppError('User does not found', 404);
     }
 
     if (data.email) {
