@@ -17,8 +17,7 @@ class DeleteUserService {
       throw new AppError('User not found', 404);
     }
 
-    const teste = await this.usersRepository.delete(userId);
-    console.log(teste);
+    await this.usersRepository.delete(userId);
   }
 }
 

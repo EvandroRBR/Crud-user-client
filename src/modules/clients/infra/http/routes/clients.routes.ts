@@ -16,5 +16,6 @@ clientsRouter.post('/', createClientValidation, clientsController.create);
 clientsRouter.get('/', clientsController.index);
 clientsRouter.get('/:id', idParamsValidate, clientsController.show);
 clientsRouter.put('/:id', idParamsValidate, clientsController.update);
+clientsRouter.delete('/:id', idParamsValidate, clientsController.delete);
 
 export { clientsRouter };

@@ -9,4 +9,5 @@ export interface IClientsRepository {
   findAll(): Promise<IClient[]>;
   findById(clientId: string): Promise<IClient | undefined>;
   save(data: IUpdateClientDTO): Promise<IClient | undefined>;
+  delete(clientId: string): Promise<void>;
 }

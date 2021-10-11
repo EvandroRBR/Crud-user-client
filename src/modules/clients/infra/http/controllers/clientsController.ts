@@ -8,6 +8,7 @@ import { CreateClientService } from '@modules/clients/services/CreateClientServi
 import { ListClientsService } from '@modules/clients/services/ListClientsService';
 import { ShowClientService } from '@modules/clients/services/ShowClientService';
 import { UpdateClientService } from '@modules/clients/services/UpdateUserService';
+import { DeleteClientsService } from '@modules/clients/services/DeleteClientsService';
 
 export class ClientsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -57,5 +58,19 @@ export class ClientsController {
     const clients = await updateClient.execute(data);
 
     return response.json(clients);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    if (!ObjectID.isValid(id)) {
+      throw new AppError('Id is in invalid format');
+    }
+
+    const deleteCliente = container.resolve(DeleteClientsService);
+
+    await deleteCliente.execute(id);
+
+    return response.json({ message: 'Client was deleted' });
   }
 }

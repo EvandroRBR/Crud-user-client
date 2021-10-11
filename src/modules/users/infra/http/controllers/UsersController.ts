@@ -62,6 +62,6 @@ export default class UsersController {
 
     await deleteUser.execute(userId);
 
-    return response.json({ message: 'Conta deletada com sucesso' });
+    return response.json({ message: 'User was deleted' });
   }
 }

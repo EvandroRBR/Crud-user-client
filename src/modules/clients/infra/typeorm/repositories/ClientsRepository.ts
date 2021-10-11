@@ -81,6 +81,12 @@ class ClientsRepository implements IClientsRepository {
 
     return updatedClient;
   }
+
+  public async delete(clientId: string): Promise<void> {
+    await this.ormRepository.findOneAndDelete({
+      _id: new ObjectId(clientId),
+    });
+  }
 }
 
 export { ClientsRepository };
