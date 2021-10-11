@@ -14,3 +14,9 @@ export const createClientValidation = celebrate({
     state: Joi.string().required(),
   },
 });
+
+export const idParamsValidate = celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().required(),
+  },
+});

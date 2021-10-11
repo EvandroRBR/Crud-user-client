@@ -1,4 +1,5 @@
 import { getMongoRepository, MongoRepository } from 'typeorm';
+import { ObjectId } from 'mongodb';
 
 import { ICreateClientDTO } from '@modules/clients/dtos/IClientDTO';
 import { IClientsRepository } from '@modules/clients/repositories/IClientsRepository';
@@ -49,6 +50,14 @@ class ClientsRepository implements IClientsRepository {
 
   public async findAll(): Promise<IClient[]> {
     const clients = this.ormRepository.find();
+
+    return clients;
+  }
+
+  public async findById(clientId: string): Promise<IClient | undefined> {
+    const clients = this.ormRepository.findOne({
+      where: { _id: new ObjectId(clientId) },
+    });
 
     return clients;
   }

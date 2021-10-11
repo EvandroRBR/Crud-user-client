@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   createUserValidation,
   UpdateUserValidation,
+  idParamsValidate,
 } from '../validations/user-class.validation';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
@@ -16,7 +17,7 @@ usersRouter.post('/', createUserValidation, usersController.create);
 usersRouter.use(ensureAuthenticated);
 
 usersRouter.get('/', usersController.index);
-usersRouter.get('/:id', usersController.show);
+usersRouter.get('/:id', idParamsValidate, usersController.show);
 usersRouter.put('/', UpdateUserValidation, usersController.update);
 usersRouter.delete('/', usersController.delete);
 

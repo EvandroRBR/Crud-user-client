@@ -31,3 +31,9 @@ export const sessionValidation = celebrate({
     password: Joi.string().required(),
   },
 });
+
+export const idParamsValidate = celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().required(),
+  },
+});

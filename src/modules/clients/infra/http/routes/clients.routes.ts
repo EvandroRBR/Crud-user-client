@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-import { createClientValidation } from '../validations/client-class.validation';
+import {
+  createClientValidation,
+  idParamsValidate,
+} from '../validations/client-class.validation';
 
 import { ClientsController } from '../controllers/clientsController';
 
@@ -11,5 +14,6 @@ clientsRouter.use(ensureAuthenticated);
 
 clientsRouter.post('/', createClientValidation, clientsController.create);
 clientsRouter.get('/', clientsController.index);
+clientsRouter.get('/:id', idParamsValidate, clientsController.show);
 
 export { clientsRouter };

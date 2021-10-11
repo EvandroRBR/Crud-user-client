@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import { CreateClientService } from '@modules/clients/services/CreateClientService';
-import { ListClientService } from '@modules/clients/services/ListClientService';
+import { ListClientsService } from '@modules/clients/services/ListClientsService';
+import { ShowClientService } from '@modules/clients/services/ShowClientService';
 
 export class ClientsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -16,9 +17,19 @@ export class ClientsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const listClients = container.resolve(ListClientService);
+    const listClients = container.resolve(ListClientsService);
 
     const clients = await listClients.execute();
+
+    return response.json(clients);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const showClient = container.resolve(ShowClientService);
+
+    const clients = await showClient.execute(id);
 
     return response.json(clients);
   }

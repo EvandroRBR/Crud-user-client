@@ -7,4 +7,5 @@ export interface IClientsRepository {
   findByCorporateName(corporate_name: string): Promise<IClient | undefined>;
   create(data: ICreateClientDTO): Promise<IClient>;
   findAll(): Promise<IClient[]>;
+  findById(clientId: string): Promise<IClient | undefined>;
 }

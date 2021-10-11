@@ -4,7 +4,7 @@ import { IClient } from '../schemas/IClient';
 import { IClientsRepository } from '../repositories/IClientsRepository';
 
 @injectable()
-class ListClientService {
+class ListClientsService {
   constructor(
     @inject('ClientsRepository')
     private clientsRepository: IClientsRepository,
@@ -17,4 +17,4 @@ class ListClientService {
   }
 }
 
-export { ListClientService };
+export { ListClientsService };
