@@ -3,7 +3,7 @@ import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAut
 import {
   createClientValidation,
   idParamsValidate,
-} from '../validations/client-class.validation';
+} from '../validations/clientValidation';
 
 import { ClientsController } from '../controllers/clientsController';
 

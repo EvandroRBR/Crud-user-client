@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { sessionValidation } from '../validations/user-class.validation';
+import { sessionValidation } from '../validations/userValidation';
 import SessionsController from '../controllers/SessionsController';
 
 const sessionsRouter = Router();

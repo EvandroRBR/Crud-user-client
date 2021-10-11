@@ -3,7 +3,7 @@ import {
   createUserValidation,
   UpdateUserValidation,
   idParamsValidate,
-} from '../validations/user-class.validation';
+} from '../validations/userValidation';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
